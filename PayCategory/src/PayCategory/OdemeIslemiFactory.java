@@ -1,4 +1,4 @@
-package com.ucuncubinyil.oop.solid.odeme.iyi;
+package PayCategory;
 
 public class OdemeIslemiFactory {
 	
@@ -9,7 +9,7 @@ public class OdemeIslemiFactory {
 		try
 		{
 			Class c;
-			c = Class.forName("com.ucuncubinyil.oop.solid.odeme.iyi."+className);
+			c = Class.forName("PayCategory."+className);
 			iOdemeTipi = (IOdemeTipi)c.newInstance();
 		}
 		catch(Exception ex) {

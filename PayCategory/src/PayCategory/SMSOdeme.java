@@ -1,4 +1,4 @@
-package com.ucuncubinyil.oop.solid.odeme.iyi;
+package PayCategory;
 
 public class SMSOdeme implements IOdemeTipi{
 
