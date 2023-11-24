@@ -16,7 +16,7 @@ public class Main {
 			String db = "jdbc:postgresql://localhost:5432/Payment";
 			
 			
-			Connection conn = DriverManager.getConnection(db, "postgres", "654123");
+			Connection conn = DriverManager.getConnection(db, "postgres", "Sifre");
 			System.out.println("veritabanına aslında bağlanıldı");
 			String sorgu = "SELECT * FROM PaymentSystem ";
 			
