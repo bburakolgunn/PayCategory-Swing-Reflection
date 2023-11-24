@@ -4,11 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
 
 public class OdemeFormu {
@@ -19,7 +23,7 @@ public class OdemeFormu {
 	private JLabel lblSonuc;
 	private IOdemeTipi iOdemeTipi;
 	private OdemeIslemiFactory factory;
-
+	private int id;
 	/**
 	 * Launch the application.
 	 */
@@ -73,12 +77,43 @@ public class OdemeFormu {
 		JButton btnOdemeYap = new JButton("Ödeme Yap");
 		btnOdemeYap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				secilenOdemeTipi = cmbOdemeTipleri.getSelectedItem().toString();
+				try
+				{
+					
+					String db = "jdbc:postgresql://localhost:5432/Payment";
+				
+					Connection conn = DriverManager.getConnection(db, "postgres", "654123");
+					PreparedStatement prStmt = conn.
+					prepareStatement("insert into paymentsystem(id,payments,price) values(?,?,?)");
+					prStmt.setInt(1,id);
+					prStmt.setString(2, toString().valueOf(cmbOdemeTipleri.getSelectedItem().toString()));
+					prStmt.setString(3,txtTutar.getText());
+					
+					int OdemeSayisi = prStmt.executeUpdate();
+					if(OdemeSayisi>0)
+					{
+						JOptionPane.showMessageDialog(null, "Ödeme alınmıştır.", "Bilgi", JOptionPane.INFORMATION_MESSAGE);
+					}
+					
+					
+				}
+				catch(Exception ex)
+				{
+				
+					JOptionPane.showMessageDialog(null, "Ödeme alınamamıştır"+ex.getMessage().toString(), 
+							"Dikkat", JOptionPane.ERROR_MESSAGE);
+				}
+				
+		
+				
+				
+				
+				/*secilenOdemeTipi = cmbOdemeTipleri.getSelectedItem().toString();
 				double tutar = Integer.valueOf(txtTutar.getText());
 				factory = new OdemeIslemiFactory();
 				iOdemeTipi = factory.createInstance(secilenOdemeTipi);
 				OdemeIslemi odemeIslemi = new OdemeIslemi(iOdemeTipi);
-				lblSonuc.setText(odemeIslemi.OdemeYap(tutar));
+				lblSonuc.setText(odemeIslemi.OdemeYap(tutar));*/
 					
 				
 			}
