@@ -82,7 +82,7 @@ public class OdemeFormu {
 					
 					String db = "jdbc:postgresql://localhost:5432/Payment";
 				
-					Connection conn = DriverManager.getConnection(db, "postgres", "654123");
+					Connection conn = DriverManager.getConnection(db, "postgres", "Sifre");
 					PreparedStatement prStmt = conn.
 					prepareStatement("insert into paymentsystem(id,payments,price) values(?,?,?)");
 					prStmt.setInt(1,id);
